@@ -28,7 +28,7 @@ It will create:
       namespace: default
     spec:
       parameters:
-        enclaveName: my-enclave
+        resourceName: my-enclave
         region: us-east-1
         availabilityZone1: us-east-1a
         availabilityZone2: us-east-1b
