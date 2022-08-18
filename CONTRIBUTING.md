@@ -28,7 +28,7 @@ make install-crossplane
 make install-crossplane-config-aws
 # Create an Enclave
 kubectl apply -f examples/enclave.yaml
-# DON'T FORGET TO DELETE YOU HAVE CREATED!!!
+# DON'T FORGET TO DELETE WHAT YOU HAVE CREATED!!!
 kubectl delete -f examples/enclave.yaml
 # Tear down the cluster that got created
 make teardown

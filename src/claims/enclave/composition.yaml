@@ -34,7 +34,7 @@ spec:
       patches:
         - type: PatchSet
           patchSetName: common-parameters
-        - fromFieldPath: spec.parameters.resourceName
+        - fromFieldPath: metadata.name
           toFieldPath: spec.forProvider.tags[0].value
     - name: public-subnet-a
       base:
@@ -57,7 +57,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-public-subnet-a"
@@ -89,7 +89,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-public-subnet-b"
@@ -121,7 +121,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-public-subnet-c"
@@ -153,7 +153,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-private-subnet-a"
@@ -185,7 +185,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-private-subnet-b"
@@ -217,7 +217,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-private-subnet-c"
@@ -249,7 +249,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-dbsubnetgroup"
@@ -276,7 +276,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-internetgateway"
@@ -302,7 +302,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-natgateway-eip"
@@ -335,7 +335,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-natgateway"
@@ -376,7 +376,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-routetable-public"
@@ -432,7 +432,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-routetable-private-a"
@@ -490,7 +490,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-routetable-private-b"
@@ -546,7 +546,7 @@ spec:
         - type: CombineFromComposite
           combine:
             variables:
-              - fromFieldPath: spec.parameters.resourceName
+              - fromFieldPath: metadata.name
             strategy: string
             string:
               fmt: "%s-routetable-private-c"

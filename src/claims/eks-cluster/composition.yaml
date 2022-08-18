@@ -1,0 +1,69 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xeksclusters.aws.infra.bigbang.dev
+  labels:
+    provider: aws
+spec:
+  compositeTypeRef:
+    apiVersion: infra.bigbang.dev/v1alpha1
+    kind: XEKSCluster
+
+  patchSets:
+    - name: common-parameters
+      patches:
+        - fromFieldPath: "spec.parameters.region"
+          toFieldPath: "spec.forProvider.region"
+
+  resources:
+    - name: cluster-role
+    - name: eks-cluster
+      base:
+        apiVersion: eks.aws.crossplane.io/v1beta1
+        kind: Cluster
+        spec:
+          forProvider:
+            # encryptionConfig:                   # Not adding yet, but may want to in future
+            logging:
+              clusterLogging:
+                - enabled: true
+                  logTypes:
+                    - api
+                    - audit
+                    - authenticator
+                    - controllerManager
+                    - scheduler
+            resourcesVpcConfig:
+              endpointPrivateAccess: true
+              endpointPublicAccess: true
+              publicAccessCidrs: ["0.0.0.0/0"]
+              # Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS
+              # creates to use to allow communication between your worker nodes and the Kubernetes control plane. If
+              # you don't specify a security group, the default security group for your VPC is used.
+              # securityGroupIds:
+          writeConnectionSecretToRef:
+            namespace: crossplane-system
+      patches:
+        - fromFieldPath: spec.parameters.subnetMatchLabels
+          toFieldPath: spec.forProvider.resourcesVpcConfig.subnetIdSelector.matchLabels
+        - type: PatchSet
+          patchSetName: common-parameters
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.tags.name
+        - fromFieldPath: spec.parameters.clusterRoleArn
+          toFieldPath: spec.forProvider.roleArn
+        - fromFieldPath: spec.parameters.k8sVersion
+          toFieldPath: spec.forProvider.version
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "kubeconfig-%s"
+      connectionDetails:
+        - name: cluster-ca
+          fromConnectionSecretKey: clusterCA
+        - name: apiserver-endpoint
+          fromConnectionSecretKey: endpoint
+        - name: value
+          fromConnectionSecretKey: kubeconfig

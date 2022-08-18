@@ -4,6 +4,7 @@ Crossplane configuration that provides various Composite Resource Claims that ma
 ## Claims
 
 - [Enclave](docs/claims/enclave.md) - Provision a production-ready Virtual Private Cloud (VPC) in AWS with all the trimmings.
+- [EKS Cluster](docs/claims/eks-cluster.md) - Provision an EKS cluster given a pre-existing Enclave
 
 ## Getting Started
 

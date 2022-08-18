@@ -1,0 +1,31 @@
+apiVersion: infra.bigbang.dev/v1alpha1
+kind: Enclave
+metadata:
+  name: crossplane-eks-cluster-example
+  namespace: default
+spec:
+  parameters:
+    resourceName: crossplane-eks-cluster-example
+    region: us-east-1
+    availabilityZone1: us-east-1a
+    availabilityZone2: us-east-1b
+    availabilityZone3: us-east-1c
+  compositionSelector:
+    matchLabels:
+      provider: aws
+---
+apiVersion: infra.bigbang.dev/v1alpha1
+kind: EKSCluster
+metadata:
+  name: crossplane-eks-cluster-example
+  namespace: default
+spec:
+  parameters:
+    region: us-east-1
+    clusterRoleArn: arn:aws:iam::950698127059:role/AmazonEKSClusterRole
+    k8sVersion: "1.21"
+    subnetMatchLabels:
+      crossplane.io/claim-name: crossplane-eks-cluster-example
+      crossplane.io/claim-namespace: default
+      type: subnet
+      visibility: public

@@ -24,9 +24,6 @@ spec:
                 parameters:
                   type: object
                   properties:
-                    resourceName:
-                      type: string
-                      description: What to name the enclave. To avoid confusion, the recommendation is to use the same value here as you used in your claim's 'metadata.name' field.
                     region:
                       type: string
                       description: The region in which to create the enclave.
@@ -40,7 +37,6 @@ spec:
                       type: string
                       description: The third availability zone to use when creating the enclave.
                   required:
-                    - resourceName
                     - region
                     - availabilityZone1
                     - availabilityZone2
