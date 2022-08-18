@@ -1,0 +1,45 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xflux.infra.bigbang.dev
+spec:
+  group: infra.bigbang.dev
+  names:
+    kind: XFlux
+    plural: xflux
+  claimNames:
+    kind: Flux
+    plural: cluster-flux
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                parameters:
+                  type: object
+                  properties:
+                    resourceName:
+                      type: string
+                      description: What to name the flux. To avoid confusion, the recommendation is to use the same value here as you used in your claim's 'metadata.name' field.
+                    ironBankPullUser:
+                      type: string
+                      description: The IB user to pull images with.
+                    ironBankPullToken:
+                      type: string
+                      description: The IB token to pull images with.
+                    ironBankAuth:
+                      type: string
+                      description: The base64 encoded auth string to stick in the docker creds secret.
+                  required:
+                    - resourceName
+                    - ironBankPullUser
+                    - ironBankPullToken
+                    - ironBankAuth
+              required:
+                - parameters
