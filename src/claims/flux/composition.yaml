@@ -1,20 +1,13 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: xflux.aws.infra.bigbang.dev
+  name: xflux.kubernetes.infra.bigbang.dev
   labels:
-    provider: aws
+    provider: kubernetes
 spec:
   compositeTypeRef:
     apiVersion: infra.bigbang.dev/v1alpha1
     kind: XFlux
-
-  patchSets:
-    - name: common-parameters
-      patches:
-        - fromFieldPath: "spec.parameters.region"
-          toFieldPath: "spec.forProvider.region"
-
   resources:
     - name: flux-namespace
       base:

@@ -11,4 +11,4 @@ spec:
     ironBankAuth: mzdsfwoeikfjd==
   compositionSelector:
     matchLabels:
-      provider: aws
+      provider: kubernetes
