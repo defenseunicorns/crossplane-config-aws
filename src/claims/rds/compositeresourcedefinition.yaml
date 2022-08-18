@@ -27,3 +27,7 @@ spec:
                     resourceName:
                       type: string
                       description: dbname      
+                  required:
+                    - resourceName
+              required:
+                - parameters

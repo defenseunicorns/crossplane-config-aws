@@ -1,0 +1,56 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: compositepostgresqlinstances.aws.database.example.org
+  labels:
+    provider: provider-aws
+    guide: quickstart
+spec:
+  writeConnectionSecretsToNamespace: crossplane-system
+  compositeTypeRef:
+    apiVersion: database.example.org/v1alpha1
+    kind: CompositePostgreSQLInstance
+  resources:
+    - name: rdsinstance
+      base:
+        apiVersion: database.aws.crossplane.io/v1beta1
+        kind: RDSInstance
+        spec:
+          providerConfigRef:
+            name: provider-aws        
+          forProvider:
+            region: us-east-1
+            allocatedStorage: 20
+            autoMinorVersionUpgrade: true
+            backupRetentionPeriod: 0
+            copyTagsToSnapshot: false
+            dbInstanceClass: db.t3.medium
+            deletionProtection: false
+            enableIAMDatabaseAuthentication: false
+            enablePerformanceInsights: false
+            engine: postgres
+            engineVersion: "13"
+            finalDBSnapshotIdentifier: orange-test
+            masterUsername: orange
+            multiAZ: false
+            port: 5432
+            publiclyAccessible: false
+            storageEncrypted: false
+            storageType: gp2
+          writeConnectionSecretToRef:
+            namespace: crossplane-system
+            name: default
+      patches:
+        - fromFieldPath: "metadata.uid"
+          toFieldPath: "spec.writeConnectionSecretToRef.name"
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-postgresql"
+        - fromFieldPath: "spec.parameters.storageGB"
+          toFieldPath: "spec.forProvider.allocatedStorage"
+      connectionDetails:
+        - fromConnectionSecretKey: username
+        - fromConnectionSecretKey: password
+        - fromConnectionSecretKey: endpoint
+        - fromConnectionSecretKey: port

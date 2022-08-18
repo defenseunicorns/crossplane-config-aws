@@ -1,0 +1,13 @@
+apiVersion: database.example.org/v1alpha1
+kind: PostgreSQLInstance
+metadata:
+  name: orange-test-composition
+  namespace: crossplane-system
+spec:
+  parameters:
+    storageGB: 10
+  compositionSelector:
+    matchLabels:
+      provider: provider-aws
+  writeConnectionSecretToRef:
+    name: db-orange-test-composition

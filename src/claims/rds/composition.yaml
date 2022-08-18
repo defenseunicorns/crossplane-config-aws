@@ -16,6 +16,9 @@ spec:
         apiVersion: database.aws.crossplane.io/v1beta1
         kind: RDSInstance
         spec: 
+          providerConfigRef:
+            name: default
           forProvider:
             dbInstanceClass: db.t2
             engine: postgres
+            region: us-east-1
