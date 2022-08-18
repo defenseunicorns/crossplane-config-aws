@@ -1,13 +1,13 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: xenclaves.aws.infra.bigbang.dev
+  name: xflux.aws.infra.bigbang.dev
   labels:
     provider: aws
 spec:
   compositeTypeRef:
     apiVersion: infra.bigbang.dev/v1alpha1
-    kind: XEnclave
+    kind: XFlux
 
   patchSets:
     - name: common-parameters
