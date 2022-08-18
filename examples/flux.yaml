@@ -1,0 +1,14 @@
+apiVersion: infra.bigbang.dev/v1alpha1
+kind: Flux
+metadata:
+  name: spoke-cluster-flux
+  namespace: default
+spec:
+  parameters:
+    resourceName: spoke-cluster-flux
+    ironBankPullUser: andrew
+    ironBankPullToken: superSecure
+    ironBankAuth: mzdsfwoeikfjd==
+  compositionSelector:
+    matchLabels:
+      provider: aws
