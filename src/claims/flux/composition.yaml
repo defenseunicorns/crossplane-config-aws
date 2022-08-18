@@ -43,8 +43,10 @@ spec:
               apiVersion: v1
               kind: Secret
               type: kubernetes.io/dockerconfigjson
+              metadata:
+                namespace: flux-system
               stringData:
-                .dockerconfigjson: ""
+                .dockerconfigjson: "placeholder"
       patches:
         - type: CombineFromComposite
           combine:
@@ -54,7 +56,7 @@ spec:
               - fromFieldPath: spec.parameters.ironBankAuth
             strategy: string
             string:
-              fmt: "{\"auths\":{\"registry1.dso.mil\":{\"username\":\"%s\",\"password\":\"%s\",\"email\":\"\",\"auth\":\"%s\"}}}"
+              fmt: "\"{\"auths\":{\"registry1.dso.mil\":{\"username\":\"%s\",\"password\":\"%s\",\"email\":\"\",\"auth\":\"%s\"}}}\""
           toFieldPath: spec.forProvider.manifest.stringData.".dockerconfigjson"
           policy:
             fromFieldPath: Required
