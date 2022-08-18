@@ -1,0 +1,20 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xrds.aws.infra.bigbang.dev
+  labels:
+    provider: aws
+spec:
+  compositeTypeRef:
+    apiVersion: infra.bigbang.dev/v1alpha1
+    kind: XRds
+
+
+  resources: 
+    - name: du-rds
+      base: 
+        apiVersion: database.aws.crossplane.io/v1beta1
+        kind: RDSInstance
+        spec: 
+          dbInstanceClass: db.t2
+          engine: postgres

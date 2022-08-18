@@ -1,0 +1,16 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xrds.infra.bigbang.dev
+spec:
+  group: infra.bigbang.dev
+  names:
+    kind: Xrds
+    plural: xrdss
+  claimNames:
+    kind: Rds
+    plural: rdss
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true    
