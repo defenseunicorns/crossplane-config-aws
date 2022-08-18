@@ -1,0 +1,9 @@
+apiVersion: infra.bigbang.dev/v1alpha1
+kind: Rds
+metadata:
+  name: my-rds
+  namespace: default
+spec: 
+  compositionSelector:
+    matchLabels:
+      provider: aws
