@@ -4,6 +4,8 @@ metadata:
   name: my-rds
   namespace: default
 spec: 
+  parameters:
+    resourceName: my-enclave
   compositionSelector:
     matchLabels:
       provider: aws

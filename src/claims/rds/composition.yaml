@@ -1,7 +1,7 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: xrds.aws.infra.bigbang.dev
+  name: xrdss.aws.infra.bigbang.dev
   labels:
     provider: aws
 spec:
@@ -16,5 +16,6 @@ spec:
         apiVersion: database.aws.crossplane.io/v1beta1
         kind: RDSInstance
         spec: 
-          dbInstanceClass: db.t2
-          engine: postgres
+          forProvider:
+            dbInstanceClass: db.t2
+            engine: postgres

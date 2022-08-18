@@ -1,7 +1,7 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: xrds.infra.bigbang.dev
+  name: xrdss.infra.bigbang.dev
 spec:
   group: infra.bigbang.dev
   names:
@@ -13,4 +13,17 @@ spec:
   versions:
     - name: v1alpha1
       served: true
-      referenceable: true    
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                parameters:
+                  type: object
+                  properties:
+                    resourceName:
+                      type: string
+                      description: dbname      
