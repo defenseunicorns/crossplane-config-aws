@@ -33,8 +33,14 @@ spec:
                     type: integer
                   region:
                     type: string
+                  dbName:
+                    type: string
+                  publiclyAccessible:
+                    type: boolean
                 required:
                   - storageGB
                   - region
+                  - dbName
+                  - publiclyAccessible
             required:
               - parameters

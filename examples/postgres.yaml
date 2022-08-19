@@ -6,7 +6,9 @@ metadata:
 spec:
   parameters:
     storageGB: 10
-    region: us-east-2
+    region: us-east-1
+    dbName: austintest
+    publiclyAccessible: true
   compositionSelector:
     matchLabels:
       provider: provider-aws

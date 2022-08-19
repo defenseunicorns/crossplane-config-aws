@@ -30,9 +30,10 @@ spec:
             engineVersion: "13"
             finalDBSnapshotIdentifier: orange-test
             masterUsername: orange
+            dbName: postgres
             multiAZ: false
             port: 5432
-            publiclyAccessible: false
+            publiclyAccessible: true
             storageEncrypted: false
             storageType: gp2
           writeConnectionSecretToRef:
@@ -48,7 +49,11 @@ spec:
         - fromFieldPath: "spec.parameters.storageGB"
           toFieldPath: "spec.forProvider.allocatedStorage"
         - fromFieldPath: "spec.parameters.region"
-          toFieldPath: "spec.forProvider.region"          
+          toFieldPath: "spec.forProvider.region"
+        - fromFieldPath: "spec.parameters.dbName"
+          toFieldPath: "spec.forProvider.dbName"
+        - fromFieldPath: "spec.parameters.publiclyAccessible"
+          toFieldPath: "spec.forProvider.publiclyAccessible"
       connectionDetails:
         - fromConnectionSecretKey: username
         - fromConnectionSecretKey: password
