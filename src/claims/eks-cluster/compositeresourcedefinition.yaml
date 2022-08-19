@@ -1,3 +1,4 @@
+# nonk8s
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
@@ -27,9 +28,6 @@ spec:
                     region:
                       type: string
                       description: The region in which to create the EKS Cluster.
-                    clusterRoleArn:
-                      description: ARN of the EKS Cluster Role to use when creating the EKS Cluster.
-                      type: string
                     k8sVersion:
                       description: Kubernetes version
                       type: string
@@ -40,7 +38,6 @@ spec:
                       additionalProperties: true
                   required:
                     - region
-                    - clusterRoleArn
                     - k8sVersion
                     - subnetMatchLabels
               required:

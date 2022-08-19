@@ -26,5 +26,5 @@ You can reference resources you've already provisioned in other Composite Resour
 
 * All managed resources get the label `crossplane.io/claim-name`
 * All managed resources get the label `crossplane.io/claim-namespace`
-* All managed resources get the label `internalName` that is unique within each composition 
+* All managed resources get the label `internalName` that is unique within each composition
 * Any resources that get provisioned in different ways get additional labels that help filter them based on what the user is looking for. For example, subnets are labeled with `visibility: public` if they are public, and `visibility: private` if they are private.
