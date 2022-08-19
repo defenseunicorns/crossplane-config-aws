@@ -356,17 +356,15 @@ spec:
               - subnetIdSelector:
                   matchControllerRef: true
                   matchLabels:
-                    visibility: public
-            # Do we need all these???
-            #              - subnetIdSelector:
-            #                  matchLabels:
-            #                    internalName: "public-subnet-a"
-            #              - subnetIdSelector:
-            #                  matchLabels:
-            #                    internalName: "public-subnet-b"
-            #              - subnetIdSelector:
-            #                  matchLabels:
-            #                    internalName: "public-subnet-c"
+                    internalName: "public-subnet-a"
+              - subnetIdSelector:
+                  matchControllerRef: true
+                  matchLabels:
+                    internalName: "public-subnet-b"
+              - subnetIdSelector:
+                  matchControllerRef: true
+                  matchLabels:
+                    internalName: "public-subnet-c"
             vpcIdSelector:
               matchControllerRef: true
             tags:
