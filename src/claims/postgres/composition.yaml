@@ -15,9 +15,7 @@ spec:
       base:
         apiVersion: database.aws.crossplane.io/v1beta1
         kind: RDSInstance
-        spec:
-          providerConfigRef:
-            name: provider-aws        
+        spec:  
           forProvider:
             region: us-east-1
             allocatedStorage: 20
