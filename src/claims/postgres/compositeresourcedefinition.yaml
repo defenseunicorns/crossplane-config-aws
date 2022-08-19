@@ -1,9 +1,9 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: compositepostgresqlinstances.super.bigbang.dev
+  name: compositepostgresqlinstances.databases.bigbang.dev
 spec:
-  group: super.bigbang.dev
+  group: databases.bigbang.dev
   names:
     kind: CompositePostgreSQLInstance
     plural: compositepostgresqlinstances

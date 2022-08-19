@@ -8,7 +8,7 @@ metadata:
 spec:
   writeConnectionSecretsToNamespace: crossplane-system
   compositeTypeRef:
-    apiVersion: super.bigbang.dev/v1alpha1
+    apiVersion: databases.bigbang.dev/v1alpha1
     kind: CompositePostgreSQLInstance
   resources:
     - name: rdsinstance
