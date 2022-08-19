@@ -1,16 +1,17 @@
 apiVersion: databases.bigbang.dev/v1alpha1
 kind: PostgreSQLInstance
 metadata:
-  name: orange-test-composition
+  name: postgres-rds-test-composition
   namespace: crossplane-system
 spec:
   parameters:
     storageGB: 10
     region: us-east-1
-    dbName: austintest
+    dbName: postgres_rds_test
     publiclyAccessible: true
+    dbInstanceClass: db.t3.medium
   compositionSelector:
     matchLabels:
-      provider: provider-aws
+      provider: aws
   writeConnectionSecretToRef:
-    name: db-orange-test-composition
+    name: postgres-rds-test-composition

@@ -3,8 +3,7 @@ kind: Composition
 metadata:
   name: compositepostgresqlinstances.aws.database.example.org
   labels:
-    provider: provider-aws
-    guide: quickstart
+    provider: aws
 spec:
   writeConnectionSecretsToNamespace: crossplane-system
   compositeTypeRef:
@@ -28,8 +27,8 @@ spec:
             enablePerformanceInsights: false
             engine: postgres
             engineVersion: "13"
-            finalDBSnapshotIdentifier: orange-test
-            masterUsername: orange
+            finalDBSnapshotIdentifier: postgres-rds-test
+            masterUsername: postgres
             dbName: postgres
             multiAZ: false
             port: 5432
@@ -54,6 +53,8 @@ spec:
           toFieldPath: "spec.forProvider.dbName"
         - fromFieldPath: "spec.parameters.publiclyAccessible"
           toFieldPath: "spec.forProvider.publiclyAccessible"
+        - fromFieldPath: "spec.parameters.dbInstanceClass"
+          toFieldPath: "spec.forProvider.dbInstanceClass"
       connectionDetails:
         - fromConnectionSecretKey: username
         - fromConnectionSecretKey: password

@@ -37,10 +37,13 @@ spec:
                     type: string
                   publiclyAccessible:
                     type: boolean
+                  dbInstanceClass:
+                    type: string
                 required:
                   - storageGB
                   - region
                   - dbName
                   - publiclyAccessible
+                  - dbInstanceClass
             required:
               - parameters
