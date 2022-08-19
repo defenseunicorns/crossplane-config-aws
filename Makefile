@@ -65,6 +65,8 @@ install-crossplane-config-aws: ## Install the Crossplane configuration and your 
 	if [[ -z "${AWS_SECRET_ACCESS_KEY}" ]]; then echo "Must provide AWS_SECRET_ACCESS_KEY in environment" 1>&2; exit 1; fi
 	echo "Installing the Crossplane configuration..."
 	[[ "$(shell kubectl get providerrevisions.pkg.crossplane.io --no-headers | wc -l | tr -d '[:space:]')" -eq "1" ]] || kubectl crossplane install provider crossplane/provider-aws:master
+	echo "Waiting a bit for the CRDs to load..."
+	sleep 60
 	kubectl apply -f test/providerconfig.yaml
 	kubectl apply -f src/claims --recursive
 	echo "Applying your AWS creds..."
