@@ -1,3 +1,4 @@
+# nonk8s
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
@@ -12,8 +13,8 @@ spec:
   patchSets:
     - name: common-parameters
       patches:
-        - fromFieldPath: "spec.parameters.region"
-          toFieldPath: "spec.forProvider.region"
+        - fromFieldPath: spec.parameters.region
+          toFieldPath: spec.forProvider.region
 
   resources:
     - name: vpc
@@ -22,10 +23,10 @@ spec:
         kind: VPC
         metadata:
           labels:
-            type: vpc
             internalName: vpc
         spec:
           forProvider:
+            # TODO: make this an optional variable
             cidrBlock: "10.0.0.0/16"
             enableDnsHostNames: true
             enableDnsSupport: true
@@ -42,11 +43,11 @@ spec:
         kind: Subnet
         metadata:
           labels:
-            type: subnet
             visibility: public
             internalName: public-subnet-a
         spec:
           forProvider:
+            # TODO: make this an optional variable
             cidrBlock: "10.0.0.0/20"
             mapPublicIPOnLaunch: true
             vpcIdSelector:
@@ -66,19 +67,19 @@ spec:
             fromFieldPath: Required
         - type: PatchSet
           patchSetName: common-parameters
-        - fromFieldPath: "spec.parameters.availabilityZone1"
-          toFieldPath: "spec.forProvider.availabilityZone"
+        - fromFieldPath: spec.parameters.availabilityZone1
+          toFieldPath: spec.forProvider.availabilityZone
     - name: public-subnet-b
       base:
         apiVersion: ec2.aws.crossplane.io/v1beta1
         kind: Subnet
         metadata:
           labels:
-            type: subnet
             visibility: public
             internalName: public-subnet-b
         spec:
           forProvider:
+            # TODO: make this an optional variable
             cidrBlock: "10.0.16.0/20"
             mapPublicIPOnLaunch: true
             vpcIdSelector:
@@ -98,19 +99,19 @@ spec:
             fromFieldPath: Required
         - type: PatchSet
           patchSetName: common-parameters
-        - fromFieldPath: "spec.parameters.availabilityZone2"
-          toFieldPath: "spec.forProvider.availabilityZone"
+        - fromFieldPath: spec.parameters.availabilityZone2
+          toFieldPath: spec.forProvider.availabilityZone
     - name: public-subnet-c
       base:
         apiVersion: ec2.aws.crossplane.io/v1beta1
         kind: Subnet
         metadata:
           labels:
-            type: subnet
             visibility: public
             internalName: public-subnet-c
         spec:
           forProvider:
+            # TODO: make this an optional variable
             cidrBlock: "10.0.32.0/20"
             mapPublicIPOnLaunch: true
             vpcIdSelector:
@@ -130,19 +131,19 @@ spec:
             fromFieldPath: Required
         - type: PatchSet
           patchSetName: common-parameters
-        - fromFieldPath: "spec.parameters.availabilityZone3"
-          toFieldPath: "spec.forProvider.availabilityZone"
+        - fromFieldPath: spec.parameters.availabilityZone3
+          toFieldPath: spec.forProvider.availabilityZone
     - name: private-subnet-a
       base:
         apiVersion: ec2.aws.crossplane.io/v1beta1
         kind: Subnet
         metadata:
           labels:
-            type: subnet
             visibility: private
             internalName: private-subnet-a
         spec:
           forProvider:
+            # TODO: make this an optional variable
             cidrBlock: "10.0.128.0/20"
             mapPublicIPOnLaunch: false
             vpcIdSelector:
@@ -162,19 +163,19 @@ spec:
             fromFieldPath: Required
         - type: PatchSet
           patchSetName: common-parameters
-        - fromFieldPath: "spec.parameters.availabilityZone1"
-          toFieldPath: "spec.forProvider.availabilityZone"
+        - fromFieldPath: spec.parameters.availabilityZone1
+          toFieldPath: spec.forProvider.availabilityZone
     - name: private-subnet-b
       base:
         apiVersion: ec2.aws.crossplane.io/v1beta1
         kind: Subnet
         metadata:
           labels:
-            type: subnet
             visibility: private
             internalName: private-subnet-b
         spec:
           forProvider:
+            # TODO: make this an optional variable
             cidrBlock: "10.0.144.0/20"
             mapPublicIPOnLaunch: false
             vpcIdSelector:
@@ -194,19 +195,19 @@ spec:
             fromFieldPath: Required
         - type: PatchSet
           patchSetName: common-parameters
-        - fromFieldPath: "spec.parameters.availabilityZone2"
-          toFieldPath: "spec.forProvider.availabilityZone"
+        - fromFieldPath: spec.parameters.availabilityZone2
+          toFieldPath: spec.forProvider.availabilityZone
     - name: private-subnet-c
       base:
         apiVersion: ec2.aws.crossplane.io/v1beta1
         kind: Subnet
         metadata:
           labels:
-            type: subnet
             visibility: private
             internalName: private-subnet-c
         spec:
           forProvider:
+            # TODO: make this an optional variable
             cidrBlock: "10.0.160.0/20"
             mapPublicIPOnLaunch: false
             vpcIdSelector:
@@ -226,22 +227,21 @@ spec:
             fromFieldPath: Required
         - type: PatchSet
           patchSetName: common-parameters
-        - fromFieldPath: "spec.parameters.availabilityZone3"
-          toFieldPath: "spec.forProvider.availabilityZone"
+        - fromFieldPath: spec.parameters.availabilityZone3
+          toFieldPath: spec.forProvider.availabilityZone
     - name: dbsubnetgroup
       base:
         apiVersion: database.aws.crossplane.io/v1beta1
         kind: DBSubnetGroup
         metadata:
           labels:
-            type: dbsubnetgroup
             internalName: dbsubnetgroup
         spec:
           forProvider:
             description: "Subnet group for databases"
             subnetIdSelector:
+              matchControllerRef: true
               matchLabels:
-                type: subnet
                 visibility: private
             tags:
               - key: Name
@@ -264,7 +264,6 @@ spec:
         kind: InternetGateway
         metadata:
           labels:
-            type: internetgateway
             internalName: internetgateway
         spec:
           forProvider:
@@ -291,11 +290,10 @@ spec:
         kind: Address
         metadata:
           labels:
-            type: eip
             internalName: natgateway-eip
         spec:
           forProvider:
-            domain: "vpc"
+            domain: vpc
             tags:
               - key: Name
       patches:
@@ -317,18 +315,17 @@ spec:
         kind: NATGateway
         metadata:
           labels:
-            type: natgateway
             internalName: natgateway
         spec:
           forProvider:
             allocationIdSelector:
+              matchControllerRef: true
               matchLabels:
-                type: eip
                 internalName: natgateway-eip
             subnetIdSelector:
+              matchControllerRef: true
               matchLabels:
-                type: subnet
-                internalName: "public-subnet-a"
+                internalName: public-subnet-a
             tags:
               - key: Name
       patches:
@@ -350,24 +347,26 @@ spec:
         kind: RouteTable
         metadata:
           labels:
-            type: routetable
+            visibility: public
             internalName: routetable-public
         spec:
           forProvider:
             ignoreRoutes: true
             associations:
               - subnetIdSelector:
+                  matchControllerRef: true
                   matchLabels:
-                    type: subnet
-                    internalName: "public-subnet-a"
-              - subnetIdSelector:
-                  matchLabels:
-                    type: subnet
-                    internalName: "public-subnet-b"
-              - subnetIdSelector:
-                  matchLabels:
-                    type: subnet
-                    internalName: "public-subnet-c"
+                    visibility: public
+# Do we need all these???
+#              - subnetIdSelector:
+#                  matchLabels:
+#                    internalName: "public-subnet-a"
+#              - subnetIdSelector:
+#                  matchLabels:
+#                    internalName: "public-subnet-b"
+#              - subnetIdSelector:
+#                  matchLabels:
+#                    internalName: "public-subnet-c"
             vpcIdSelector:
               matchControllerRef: true
             tags:
@@ -391,18 +390,18 @@ spec:
         kind: Route
         metadata:
           labels:
-            type: route
             internalName: route-routetable-public-1
         spec:
           forProvider:
+            # TODO: make this an optional variable
             destinationCIDRBlock: "0.0.0.0/0"
             gatewayIdSelector:
+              matchControllerRef: true
               matchLabels:
-                type: internetgateway
                 internalName: internetgateway
             routeTableIdSelector:
+              matchControllerRef: true
               matchLabels:
-                type: routetable
                 internalName: routetable-public
       patches:
         - type: PatchSet
@@ -413,7 +412,6 @@ spec:
         kind: RouteTable
         metadata:
           labels:
-            type: routetable
             visibility: private
             internalName: routetable-private-a
         spec:
@@ -421,9 +419,9 @@ spec:
             ignoreRoutes: true
             associations:
               - subnetIdSelector:
+                  matchControllerRef: true
                   matchLabels:
-                    type: subnet
-                    internalName: "private-subnet-a"
+                    internalName: private-subnet-a
             vpcIdSelector:
               matchControllerRef: true
             tags:
@@ -449,18 +447,16 @@ spec:
         kind: Route
         metadata:
           labels:
-            type: route
             internalName: route-routetable-private-a-1
         spec:
           forProvider:
+            # TODO: make this an optional variable
             destinationCIDRBlock: "0.0.0.0/0"
             natGatewayIdSelector:
-              matchLabels:
-                type: natgateway
-                internalName: "natgateway"
+              matchControllerRef: true
             routeTableIdSelector:
+              matchControllerRef: true
               matchLabels:
-                type: routetable
                 internalName: routetable-private-a
       patches:
         - type: PatchSet
@@ -471,7 +467,6 @@ spec:
         kind: RouteTable
         metadata:
           labels:
-            type: routetable
             visibility: private
             internalName: routetable-private-b
         spec:
@@ -479,9 +474,9 @@ spec:
             ignoreRoutes: true
             associations:
               - subnetIdSelector:
+                  matchControllerRef: true
                   matchLabels:
-                    type: subnet
-                    internalName: "private-subnet-b"
+                    internalName: private-subnet-b
             vpcIdSelector:
               matchControllerRef: true
             tags:
@@ -505,18 +500,16 @@ spec:
         kind: Route
         metadata:
           labels:
-            type: route
             internalName: route-routetable-private-b-1
         spec:
           forProvider:
+            # TODO: make this an optional variable
             destinationCIDRBlock: "0.0.0.0/0"
             natGatewayIdSelector:
-              matchLabels:
-                type: natgateway
-                internalName: "natgateway"
+              matchControllerRef: true
             routeTableIdSelector:
+              matchControllerRef: true
               matchLabels:
-                type: routetable
                 internalName: routetable-private-b
       patches:
         - type: PatchSet
@@ -527,7 +520,6 @@ spec:
         kind: RouteTable
         metadata:
           labels:
-            type: routetable
             visibility: private
             internalName: routetable-private-c
         spec:
@@ -535,8 +527,8 @@ spec:
             ignoreRoutes: true
             associations:
               - subnetIdSelector:
+                  matchControllerRef: true
                   matchLabels:
-                    type: subnet
                     internalName: "private-subnet-c"
             vpcIdSelector:
               matchControllerRef: true
@@ -561,18 +553,16 @@ spec:
         kind: Route
         metadata:
           labels:
-            type: route
             internalName: route-routetable-private-c-1
         spec:
           forProvider:
+            # TODO: make this an optional variable
             destinationCIDRBlock: "0.0.0.0/0"
             natGatewayIdSelector:
-              matchLabels:
-                type: natgateway
-                internalName: "natgateway"
+              matchControllerRef: true
             routeTableIdSelector:
+              matchControllerRef: true
               matchLabels:
-                type: routetable
                 internalName: routetable-private-c
       patches:
         - type: PatchSet

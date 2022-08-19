@@ -29,3 +29,6 @@ spec:
       crossplane.io/claim-namespace: default
       type: subnet
       visibility: public
+  compositionSelector:
+    matchLabels:
+      provider: aws
