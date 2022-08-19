@@ -1,4 +1,4 @@
-apiVersion: database.example.org/v1alpha1
+apiVersion: super.bigbang.dev/v1alpha1
 kind: PostgreSQLInstance
 metadata:
   name: orange-test-composition
