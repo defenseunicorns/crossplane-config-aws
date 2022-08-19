@@ -47,6 +47,8 @@ spec:
                 fmt: "%s-postgresql"
         - fromFieldPath: "spec.parameters.storageGB"
           toFieldPath: "spec.forProvider.allocatedStorage"
+        - fromFieldPath: "spec.parameters.region"
+          toFieldPath: "spec.forProvider.region"          
       connectionDetails:
         - fromConnectionSecretKey: username
         - fromConnectionSecretKey: password

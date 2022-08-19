@@ -31,7 +31,10 @@ spec:
                 properties:
                   storageGB:
                     type: integer
+                  region:
+                    type: string
                 required:
                   - storageGB
+                  - region
             required:
               - parameters

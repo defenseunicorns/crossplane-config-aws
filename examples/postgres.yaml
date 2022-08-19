@@ -6,6 +6,7 @@ metadata:
 spec:
   parameters:
     storageGB: 10
+    region: us-east-2
   compositionSelector:
     matchLabels:
       provider: provider-aws
