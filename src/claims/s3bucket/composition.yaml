@@ -25,7 +25,7 @@ spec:
           # providerConfigRef:
           #   name: providerconfig-aws 
           providerConfigRef:
-            name: aws          
+            name: default
       patches:
         - fromFieldPath: "spec.parameters.bucketName"
           toFieldPath: "metadata.name"
