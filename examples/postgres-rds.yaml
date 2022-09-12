@@ -1,3 +1,35 @@
+apiVersion: infra.bigbang.dev/v1alpha1
+kind: Enclave
+metadata:
+  name: db-enclave
+  namespace: crossplane-system
+spec:
+  parameters:
+    region: us-east-1
+    availabilityZone1: us-east-1a
+    availabilityZone2: us-east-1b
+    availabilityZone3: us-east-1c
+  compositionSelector:
+    matchLabels:
+      provider: aws
+---
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: SecurityGroup
+metadata:
+  namespace: crossplane-system
+  name: db-security-group
+spec:
+  forProvider:
+    groupName: database-security-group
+    vpcId: id(vpc)
+    description: db with vpc
+    ingress:
+      - fromPort: 5432
+        toPort: 5432
+        protocol: tcp
+        cidrBlocks:
+          - 0.0.0.0/0
+---
 apiVersion: databases.bigbang.dev/v1alpha1
 kind: PostgreSQLInstance
 metadata:
@@ -10,8 +42,11 @@ spec:
     dbName: postgres_rds_test
     publiclyAccessible: false
     dbInstanceClass: db.t3.medium
+    dbSecurityGroups: 
+      - id(database-security-group)
     dbSubnetMatchLabels:
-      crossplane.io/claim-name: crossplane-eks-cluster-example
+      crossplane.io/claim-name: db-enclave
+      crossplane.io/claim-namespace: crossplane-system
       internalName: dbsubnetgroup
   compositionSelector:
     matchLabels:

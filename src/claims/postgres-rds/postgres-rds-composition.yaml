@@ -32,6 +32,7 @@ spec:
             storageEncrypted: false
             storageType: gp2
             publiclyAccessible: false
+
           writeConnectionSecretToRef:
             namespace: crossplane-system
             name: default
@@ -52,8 +53,12 @@ spec:
           toFieldPath: "spec.forProvider.publiclyAccessible"
         - fromFieldPath: "spec.parameters.dbInstanceClass"
           toFieldPath: "spec.forProvider.dbInstanceClass"
-        - fromFieldPath: spec.parameters.dbSubnetMatchLabels
-          toFieldPath: spec.forProvider.dbSubnetGroupNameSelector.matchLabels
+        - fromFieldPath: "spec.parameters.dbSubnetMatchLabels"
+          toFieldPath: "spec.forProvider.dbSubnetGroupNameSelector.matchLabels"
+        - fromFieldPath: "spec.parameters.vpcSubnetMatchLabels"
+          toFieldPath: "spec.forProvider.vpc"
+        - fromFieldPath: "spec.parameters.dbSecurityGroups"
+          toFieldPath: "spec.forProvider.dbSecurityGroups"
       connectionDetails:
         - fromConnectionSecretKey: username
         - fromConnectionSecretKey: password

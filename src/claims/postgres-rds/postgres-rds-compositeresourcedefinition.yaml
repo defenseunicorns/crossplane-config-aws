@@ -40,9 +40,11 @@ spec:
                   dbInstanceClass:
                     type: string
                   dbSubnetMatchLabels:
-                    description: The labels to match to when selecting subnets to deploy the cluster into
+                    description: The labels to match to when selecting the dbsubnetgroup
                     type: object
                     additionalProperties: true
+                  dbSecurityGroups:
+                    type: []string
                 required:
                   - storageGB
                   - region
