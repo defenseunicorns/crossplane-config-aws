@@ -47,7 +47,6 @@ spec:
                   - storageGB
                   - region
                   - dbName
-                  - publiclyAccessible
                   - dbInstanceClass
                   - subnetMatchLabels
             required:
