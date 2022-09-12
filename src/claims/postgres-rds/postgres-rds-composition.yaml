@@ -32,6 +32,8 @@ spec:
             storageEncrypted: false
             storageType: gp2
             publiclyAccessible: false
+            vpcSecurityGroupIDRefs:
+              name: database-security-group
 
           writeConnectionSecretToRef:
             namespace: crossplane-system
@@ -57,8 +59,6 @@ spec:
           toFieldPath: "spec.forProvider.dbSubnetGroupNameSelector.matchLabels"
         - fromFieldPath: "spec.parameters.vpcSubnetMatchLabels"
           toFieldPath: "spec.forProvider.vpc"
-        - fromFieldPath: "spec.parameters.dbSecurityGroups"
-          toFieldPath: "spec.forProvider.dbSecurityGroups"
       connectionDetails:
         - fromConnectionSecretKey: username
         - fromConnectionSecretKey: password

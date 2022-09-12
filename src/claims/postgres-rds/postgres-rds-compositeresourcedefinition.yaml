@@ -43,10 +43,6 @@ spec:
                     description: The labels to match to when selecting the dbsubnetgroup
                     type: object
                     additionalProperties: true
-                  dbSecurityGroups:
-                    type: array
-                    items:
-                      type: string
                 required:
                   - storageGB
                   - region

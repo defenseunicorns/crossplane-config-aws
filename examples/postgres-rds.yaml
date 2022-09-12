@@ -21,7 +21,12 @@ metadata:
 spec:
   forProvider:
     groupName: database-security-group
-    vpcId: id(vpc)
+    region: us-east-1
+    vpcIdSelector: 
+      matchLabels:
+        crossplane.io/claim-name: db-enclave
+        crossplane.io/claim-namespace: crossplane-system
+        internalName: vpc
     description: db with vpc
     ingress:
       - fromPort: 5432
@@ -42,8 +47,6 @@ spec:
     dbName: postgres_rds_test
     publiclyAccessible: false
     dbInstanceClass: db.t3.medium
-    dbSecurityGroups: 
-      - id(database-security-group)
     dbSubnetMatchLabels:
       crossplane.io/claim-name: db-enclave
       crossplane.io/claim-namespace: crossplane-system
