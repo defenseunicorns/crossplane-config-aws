@@ -5,7 +5,6 @@ metadata:
   namespace: default
 spec:
   parameters:
-    resourceName: my-enclave
     region: us-east-1
     availabilityZone1: us-east-1a
     availabilityZone2: us-east-1b
