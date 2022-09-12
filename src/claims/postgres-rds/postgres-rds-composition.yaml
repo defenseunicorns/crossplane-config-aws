@@ -34,7 +34,6 @@ spec:
             publiclyAccessible: false
             vpcSecurityGroupIDRefs:
               name: database-security-group
-
           writeConnectionSecretToRef:
             namespace: crossplane-system
             name: default
