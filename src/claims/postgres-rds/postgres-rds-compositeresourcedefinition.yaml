@@ -39,11 +39,16 @@ spec:
                     type: boolean
                   dbInstanceClass:
                     type: string
+                  subnetMatchLabels:
+                    description: The labels to match to when selecting subnets to deploy the cluster into
+                    type: object
+                    additionalProperties: true
                 required:
                   - storageGB
                   - region
                   - dbName
                   - publiclyAccessible
                   - dbInstanceClass
+                  - subnetMatchLabels
             required:
               - parameters
