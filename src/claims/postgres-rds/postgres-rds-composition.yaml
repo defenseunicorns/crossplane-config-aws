@@ -52,8 +52,8 @@ spec:
           toFieldPath: "spec.forProvider.publiclyAccessible"
         - fromFieldPath: "spec.parameters.dbInstanceClass"
           toFieldPath: "spec.forProvider.dbInstanceClass"
-        - fromFieldPath: spec.parameters.subnetMatchLabels
-          toFieldPath: spec.forProvider.resourcesVpcConfig.subnetIdSelector.matchLabels
+        - fromFieldPath: spec.parameters.dbSubnetMatchLabels
+          toFieldPath: spec.forProvider.dbSubnetGroupNameSelector.matchLabels
       connectionDetails:
         - fromConnectionSecretKey: username
         - fromConnectionSecretKey: password

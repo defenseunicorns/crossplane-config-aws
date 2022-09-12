@@ -39,7 +39,7 @@ spec:
                     type: boolean
                   dbInstanceClass:
                     type: string
-                  subnetMatchLabels:
+                  dbSubnetMatchLabels:
                     description: The labels to match to when selecting subnets to deploy the cluster into
                     type: object
                     additionalProperties: true
