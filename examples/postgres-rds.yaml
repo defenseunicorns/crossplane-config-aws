@@ -8,7 +8,7 @@ spec:
     storageGB: 10
     region: us-east-1
     dbName: postgres_rds_test
-    publiclyAccessible: true
+    publiclyAccessible: false
     dbInstanceClass: db.t3.medium
   compositionSelector:
     matchLabels:
