@@ -2,12 +2,12 @@ apiVersion: s3bucket.bigbang.dev/v1alpha1
 kind: Bucket
 metadata:
   namespace: default
-  name: gavin-bucket-us-east-1
+  name: test-s3-bucket-us-east-1
   annotations:
-    crossplane.io/external-name: gavin-bucket-us-east-1
+    crossplane.io/external-name: test-s3-bucket-us-east-1
 spec:
   parameters:
-    bucketName: gavin-bucket-us-east-1
+    bucketName: test-s3-bucket-us-east-1
     region: us-east-1
   compositionSelector:
     matchLabels:
