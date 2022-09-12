@@ -16,8 +16,6 @@ spec:
         kind: RDSInstance
         spec:  
           forProvider:
-            region: us-east-1
-            allocatedStorage: 20
             autoMinorVersionUpgrade: true
             backupRetentionPeriod: 0
             copyTagsToSnapshot: false
@@ -29,10 +27,8 @@ spec:
             engineVersion: "13"
             finalDBSnapshotIdentifier: postgres-rds-test
             masterUsername: postgres
-            dbName: postgres
             multiAZ: false
             port: 5432
-            publiclyAccessible: true
             storageEncrypted: false
             storageType: gp2
           writeConnectionSecretToRef:
