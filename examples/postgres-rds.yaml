@@ -26,9 +26,9 @@ spec:
     ingress:
       - fromPort: 5432
         toPort: 5432
-        protocol: tcp
-        cidrBlocks:
-          - 0.0.0.0/0
+        ipProtocol: tcp
+        ipRanges:
+          - cidrIp: 0.0.0.0/0
 ---
 apiVersion: databases.bigbang.dev/v1alpha1
 kind: PostgreSQLInstance

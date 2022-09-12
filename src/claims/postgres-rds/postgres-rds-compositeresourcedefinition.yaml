@@ -44,7 +44,9 @@ spec:
                     type: object
                     additionalProperties: true
                   dbSecurityGroups:
-                    type: []string
+                    type: array
+                    items:
+                      type: string
                 required:
                   - storageGB
                   - region
