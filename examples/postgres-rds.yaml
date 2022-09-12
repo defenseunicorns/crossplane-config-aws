@@ -10,6 +10,9 @@ spec:
     dbName: postgres_rds_test
     publiclyAccessible: false
     dbInstanceClass: db.t3.medium
+    dbSubnetMatchLabels:
+      crossplane.io/claim-name: crossplane-eks-cluster-example
+      internalName: dbsubnetgroup
   compositionSelector:
     matchLabels:
       provider: aws

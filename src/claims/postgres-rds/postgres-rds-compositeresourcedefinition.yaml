@@ -48,6 +48,6 @@ spec:
                   - region
                   - dbName
                   - dbInstanceClass
-                  - subnetMatchLabels
+                  - dbSubnetMatchLabels
             required:
               - parameters
