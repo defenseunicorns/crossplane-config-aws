@@ -18,22 +18,4 @@ It will create:
 
 1. Follow the [Getting Started](../../README.md#getting-started) docs.
 
-1. Provision an enclave using `kubectl apply -f <filename>`. Here's an example configuration:
-
-    ```yaml
-    apiVersion: infra.bigbang.dev/v1alpha1
-    kind: Enclave
-    metadata:
-      name: my-enclave
-      namespace: default
-    spec:
-      parameters:
-        resourceName: my-enclave
-        region: us-east-1
-        availabilityZone1: us-east-1a
-        availabilityZone2: us-east-1b
-        availabilityZone3: us-east-1c
-      compositionSelector:
-        matchLabels:
-          provider: aws
-    ```
+1. Provision an enclave using `kubectl apply -f <filename>`. Here's an [example configuration](../../examples/enclave.yaml).
