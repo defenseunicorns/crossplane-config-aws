@@ -32,8 +32,9 @@ spec:
             storageEncrypted: false
             storageType: gp2
             publiclyAccessible: false
-            vpcSecurityGroupIDRefs:
-              - name: database-security-group
+            AvailabilityZone: us-east-1a
+            # vpcSecurityGroupIDRefs:
+            #   - name: database-security-group
             
           writeConnectionSecretToRef:
             namespace: crossplane-system
