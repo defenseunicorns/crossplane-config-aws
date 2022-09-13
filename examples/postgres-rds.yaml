@@ -13,30 +13,6 @@ spec:
     matchLabels:
       provider: aws
 ---
-apiVersion: ec2.aws.crossplane.io/v1beta1
-kind: SecurityGroup
-metadata:
-  namespace: crossplane-system
-  name: db-security-group
-  labels:
-    internalName: dbsecuritygroup
-spec:
-  forProvider:
-    groupName: database-security-group
-    region: us-east-1
-    vpcIdSelector: 
-      matchLabels:
-        crossplane.io/claim-name: db-enclave
-        crossplane.io/claim-namespace: crossplane-system
-        internalName: vpc
-    description: db with vpc
-    ingress:
-      - fromPort: 5432
-        toPort: 5432
-        ipProtocol: tcp
-        ipRanges:
-          - cidrIp: 0.0.0.0/0
----
 apiVersion: databases.bigbang.dev/v1alpha1
 kind: PostgreSQLInstance
 metadata:
