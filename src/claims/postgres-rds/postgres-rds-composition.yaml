@@ -25,14 +25,15 @@ spec:
             enablePerformanceInsights: false
             engine: postgres
             engineVersion: "13"
-            finalDBSnapshotIdentifier: postgres-rds-test
             masterUsername: postgres
             multiAZ: false
             port: 5432
             storageEncrypted: false
             storageType: gp2
             publiclyAccessible: false
-            AvailabilityZone: us-east-1a
+            availabilityZone: us-east-1a
+            skipFinalSnapshotBeforeDeletion: true
+            #applyModificationsImmediately: true
             vpcSecurityGroupIDSelector:
               matchLabels:                
                 # crossplane.io/claim-name: db-security-group
