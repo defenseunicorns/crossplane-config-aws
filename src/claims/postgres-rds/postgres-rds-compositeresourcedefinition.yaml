@@ -45,6 +45,10 @@ spec:
                     additionalProperties: true
                   availabilityZone:
                     type: string
+                  vpcIdSelectorMatchLabels:
+                    description: The labels to match to when selecting the vpcId
+                    type: object
+                    additionalProperties: true
                 required:
                   - storageGB
                   - region
@@ -52,5 +56,6 @@ spec:
                   - dbInstanceClass
                   - dbSubnetMatchLabels
                   - availabilityZone
+                  - vpcIdSelectorMatchLabels
             required:
               - parameters

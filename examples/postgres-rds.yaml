@@ -30,6 +30,10 @@ spec:
       crossplane.io/claim-name: db-enclave
       crossplane.io/claim-namespace: crossplane-system
       internalName: dbsubnetgroup
+    vpcIdSelectorMatchLabels:
+      crossplane.io/claim-name: db-enclave
+      crossplane.io/claim-namespace: crossplane-system
+      internalName: vpc
   compositionSelector:
     matchLabels:
       provider: aws

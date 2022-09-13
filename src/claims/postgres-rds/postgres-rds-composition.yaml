@@ -23,18 +23,21 @@ spec:
           forProvider:
             groupName: database-security-group
             region: us-east-1
-            vpcIdSelector: 
-              matchLabels:
-                crossplane.io/claim-name: db-enclave
-                crossplane.io/claim-namespace: crossplane-system
-                internalName: vpc
-            description: db with vpc
+            # vpcIdSelector: 
+            #   matchLabels:
+            #     crossplane.io/claim-name: db-enclave
+            #     crossplane.io/claim-namespace: crossplane-system
+            #     internalName: vpc
+            description: Security group for database
             ingress:
               - fromPort: 5432
                 toPort: 5432
                 ipProtocol: tcp
                 ipRanges:
                   - cidrIp: 0.0.0.0/0
+      patches:
+        - fromFieldPath: "spec.parameters.vpcIdSelectorMatchLabels"
+          toFieldPath: "spec.forProvider.vpcIdSelector.matchLabels"            
     - name: rdsinstance
       base:
         apiVersion: database.aws.crossplane.io/v1beta1
@@ -53,13 +56,7 @@ spec:
             availabilityZone: us-east-1a
             skipFinalSnapshotBeforeDeletion: true
             vpcSecurityGroupIDSelector:
-              matchLabels:                
-                internalName: dbsecuritygroup
-                # crossplane.io/claim-name: db-security-group
-                # crossplane.io/claim-namespace: crossplane-system
-            # vpcSecurityGroupIDRefs:
-            #   - name: database-security-group
-            
+              matchControllerRef: true
           writeConnectionSecretToRef:
             namespace: crossplane-system
             name: default
