@@ -17,27 +17,21 @@ spec:
         spec:  
           forProvider:
             autoMinorVersionUpgrade: true
-            backupRetentionPeriod: 0
-            copyTagsToSnapshot: false
             dbInstanceClass: db.t3.medium
-            deletionProtection: false
-            enableIAMDatabaseAuthentication: false
-            enablePerformanceInsights: false
             engine: postgres
             engineVersion: "13"
             masterUsername: postgres
             multiAZ: false
             port: 5432
-            storageEncrypted: false
             storageType: gp2
             publiclyAccessible: false
             availabilityZone: us-east-1a
             skipFinalSnapshotBeforeDeletion: true
             vpcSecurityGroupIDSelector:
               matchLabels:                
+                internalName: dbsecuritygroup
                 # crossplane.io/claim-name: db-security-group
                 # crossplane.io/claim-namespace: crossplane-system
-                internalName: dbsecuritygroup
             # vpcSecurityGroupIDRefs:
             #   - name: database-security-group
             
