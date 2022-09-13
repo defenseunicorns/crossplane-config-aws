@@ -33,7 +33,6 @@ spec:
             publiclyAccessible: false
             availabilityZone: us-east-1a
             skipFinalSnapshotBeforeDeletion: true
-            #applyModificationsImmediately: true
             vpcSecurityGroupIDSelector:
               matchLabels:                
                 # crossplane.io/claim-name: db-security-group
