@@ -33,6 +33,11 @@ spec:
             storageType: gp2
             publiclyAccessible: false
             AvailabilityZone: us-east-1a
+            vpcSecurityGroupIDSelector:
+              matchLabels:                
+                # crossplane.io/claim-name: db-security-group
+                # crossplane.io/claim-namespace: crossplane-system
+                internalName: dbsecuritygroup
             # vpcSecurityGroupIDRefs:
             #   - name: database-security-group
             

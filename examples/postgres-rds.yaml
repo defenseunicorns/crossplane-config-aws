@@ -18,6 +18,8 @@ kind: SecurityGroup
 metadata:
   namespace: crossplane-system
   name: db-security-group
+  labels:
+    internalName: dbsecuritygroup
 spec:
   forProvider:
     groupName: database-security-group
