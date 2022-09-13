@@ -28,19 +28,6 @@ kind: amazonEks
 metadata:
   name: xplane-eks-cluster
   namespace: default
-
-spec:
-  parameters:
-    region: us-east-1
-    k8sVersion: "1.22"
-    subnetMatchLabels:
-      crossplane.io/claim-name: crossplane-eks-cluster-example
-      crossplane.io/claim-namespace: default
-      visibility: public
-  compositionSelector:
-    matchLabels:
-      provider: crossplane-provider-aws
-
 spec:
   compositionSelector:
     matchLabels:
@@ -57,9 +44,9 @@ spec:
     endpointPrivateAccess: false
     endpointPublicAccess: true
     subnetIds: # Update your subnet ids
-      - "subnet-00386f791ff3b9360"
-      - "subnet-0fbb8e9472a372586"
-      - "subnet-023678b193f9486f5"
+      - "subnet-093ad038c5af0df56"
+      - "subnet-06dd3db046ed7319d"
+      - "subnet-0ab95b375d34b4666"
   managedNodeGroups:
     minSize: 2
   writeConnectionSecretToRef:
