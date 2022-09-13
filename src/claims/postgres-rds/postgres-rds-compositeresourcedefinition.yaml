@@ -43,11 +43,14 @@ spec:
                     description: The labels to match to when selecting the dbsubnetgroup
                     type: object
                     additionalProperties: true
+                  availabilityZone:
+                    type: string
                 required:
                   - storageGB
                   - region
                   - dbName
                   - dbInstanceClass
                   - dbSubnetMatchLabels
+                  - availabilityZone
             required:
               - parameters
