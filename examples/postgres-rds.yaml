@@ -49,6 +49,7 @@ spec:
     dbName: postgres_rds_test
     publiclyAccessible: false
     dbInstanceClass: db.t3.medium
+    availabilityZone: us-east-1a
     dbSubnetMatchLabels:
       crossplane.io/claim-name: db-enclave
       crossplane.io/claim-namespace: crossplane-system
