@@ -44,7 +44,7 @@ spec:
 spec:
   compositionSelector:
     matchLabels:
-      awsblueprints.io/provider: aws
+      awsblueprints.io/provider: crossplane-provider-aws
       awsblueprints.io/environment: dev
       awsblueprints.io/subnet-selection: id
       service: eks
@@ -57,9 +57,9 @@ spec:
     endpointPrivateAccess: false
     endpointPublicAccess: true
     subnetIds: # Update your subnet ids
-      - "subnet-0635719adbb23bbf8"
-      - "subnet-0911f1865b65024b4"
-      - "subnet-00dcdf50b5603ef25"
+      - "subnet-00386f791ff3b9360"
+      - "subnet-0fbb8e9472a372586"
+      - "subnet-023678b193f9486f5"
   managedNodeGroups:
     minSize: 2
   writeConnectionSecretToRef:

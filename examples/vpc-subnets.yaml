@@ -1,0 +1,54 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+# Run `kubectl apply -f vpc-subnets-claim.yaml` to test this example once you bootstrap the EKS cluster with Crossplane and AWS Provider
+
+# This example resource creates the following resources
+#     1. VPC
+#     2. Public Subnet
+#     3. Private Subnet
+#     4. Internet Gateway
+#     5. NAT Gateway
+#     6. EIP for NAT gateway
+#     7. Public Route Table for IGW
+#     8. Private Route Table for NAT GW
+
+---
+apiVersion: network.awsblueprints.io/v1alpha1
+kind: vpcSubnet
+metadata:
+  name: xplane-vpc-subnets
+  namespace: default
+spec:
+  compositionSelector:
+    matchLabels:
+      awsblueprints.io/provider: crossplane-provider-aws
+      awsblueprints.io/environment: dev
+      awsblueprints.io/network-id: "false"
+      service: vpcsubnet
+  resourceConfig:
+    providerConfigName: default
+    region: us-east-1
+  parameters:
+    #vpc input
+    vpc-Name: xplane-vpc
+    vpc-cidrBlock: "172.16.0.0/16"   
+    vpc-amazonProvidedIpv6CidrBlock: false
+    #public subnet1
+    publicSubnet1-cidrBlock: "172.16.0.0/27" 
+    publicSubnet1-availabilityZone: us-east-1a
+    #public subnet2
+    publicSubnet2-cidrBlock: "172.16.32.0/27" 
+    publicSubnet2-availabilityZone: us-east-1b
+    #public subnet3
+    publicSubnet3-cidrBlock: "172.16.64.0/27" 
+    publicSubnet3-availabilityZone: us-east-1c
+    #private subnet1
+    privateSubnet1-cidrBlock: "172.16.128.0/27" 
+    privateSubnet1-availabilityZone: us-east-1a
+    #private subnet2
+    privateSubnet2-cidrBlock: "172.16.160.0/27" 
+    privateSubnet2-availabilityZone: us-east-1b
+    #private subnet3
+    privateSubnet3-cidrBlock: "172.16.192.0/27" 
+    privateSubnet3-availabilityZone: us-east-1c
