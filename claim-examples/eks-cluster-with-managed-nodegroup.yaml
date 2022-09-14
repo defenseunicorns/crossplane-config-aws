@@ -21,7 +21,7 @@ metadata:
 spec:
   parameters:
     region: us-east-1
-    k8sVersion: "1.21"
+    k8sVersion: "1.22"
     subnetMatchLabels:
       crossplane.io/claim-name: crossplane-eks-cluster-with-managed-nodegroup-example
       crossplane.io/claim-namespace: default
