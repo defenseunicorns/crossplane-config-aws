@@ -80,6 +80,11 @@ teardown-cluster: build/kind ## Tear down the k8s cluster
 	echo "Tearing down the k8s cluster..."
 	build/kind delete cluster --name test-crossplane-config-aws
 
+.PHONY: run-pre-commit-hooks
+run-pre-commit-hooks: ## Run all pre-commit hooks. Returns nonzero exit code if any hooks fail. Uses Docker for maximum compatibility
+	@mkdir -p .cache/pre-commit
+	@docker run --rm -v "${PWD}:/app" --workdir "/app" -e "PRE_COMMIT_HOME=/app/.cache/pre-commit" ghcr.io/defenseunicorns/zarf-package-software-factory/build-harness:$(BUILD_HARNESS_VERSION) pre-commit run -a
+
 .PHONY: docker-save-build-harness
 docker-save-build-harness: ## Pulls the build harness docker image and saves it to a tarball
 	@mkdir -p .cache/docker
