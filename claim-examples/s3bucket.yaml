@@ -1,0 +1,14 @@
+apiVersion: s3bucket.bigbang.dev/v1alpha1
+kind: Bucket
+metadata:
+  namespace: default
+  name: test-s3-bucket-us-east-1
+  annotations:
+    crossplane.io/external-name: test-s3-bucket-us-east-1
+spec:
+  parameters:
+    bucketName: test-s3-bucket-us-east-1
+    region: us-east-1
+  compositionSelector:
+    matchLabels:
+      provider: aws
