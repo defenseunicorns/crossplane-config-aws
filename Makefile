@@ -1,4 +1,3 @@
-SHELL := /bin/bash
 KIND_VERSION := v0.14.0
 
 KIND_BIN := kind
