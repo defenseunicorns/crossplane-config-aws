@@ -16,18 +16,10 @@ spec:
         kind: SecurityGroup
         metadata:
           namespace: crossplane-system
-          name: db-security-group
           labels:
             internalName: dbsecuritygroup
         spec:
           forProvider:
-            groupName: database-security-group
-            region: us-east-1
-            # vpcIdSelector: 
-            #   matchLabels:
-            #     crossplane.io/claim-name: db-enclave
-            #     crossplane.io/claim-namespace: crossplane-system
-            #     internalName: vpc
             description: Security group for database
             ingress:
               - fromPort: 5432
@@ -37,7 +29,17 @@ spec:
                   - cidrIp: 0.0.0.0/0
       patches:
         - fromFieldPath: "spec.parameters.vpcIdSelectorMatchLabels"
-          toFieldPath: "spec.forProvider.vpcIdSelector.matchLabels"            
+          toFieldPath: "spec.forProvider.vpcIdSelector.matchLabels"
+        - fromFieldPath: "spec.parameters.region"
+          toFieldPath: "spec.forProvider.region"
+        - fromFieldPath: "spec.parameters.sgName"
+          toFieldPath: "metadata.name"
+        - fromFieldPath: "metadata.uid"
+          toFieldPath: "spec.forProvider.groupName"
+          transforms:
+            - type: string
+              string:
+                fmt: "database-security-group-%s"          
     - name: rdsinstance
       base:
         apiVersion: database.aws.crossplane.io/v1beta1
@@ -45,14 +47,12 @@ spec:
         spec:  
           forProvider:
             autoMinorVersionUpgrade: true
-            dbInstanceClass: db.t3.medium
             engine: postgres
             engineVersion: "13"
             masterUsername: postgres
             multiAZ: false
             port: 5432
             storageType: gp2
-            publiclyAccessible: false
             skipFinalSnapshotBeforeDeletion: true
             vpcSecurityGroupIDSelector:
               matchControllerRef: true

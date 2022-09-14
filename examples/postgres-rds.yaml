@@ -22,10 +22,10 @@ spec:
   parameters:
     storageGB: 10
     region: us-east-1
-    dbName: postgres_rds_test
+    availabilityZone: us-east-1a
+    dbName: postgresrdstest
     publiclyAccessible: false
     dbInstanceClass: db.t3.medium
-    availabilityZone: us-east-1a
     dbSubnetMatchLabels:
       crossplane.io/claim-name: db-enclave
       crossplane.io/claim-namespace: crossplane-system
