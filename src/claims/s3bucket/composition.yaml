@@ -41,7 +41,6 @@ spec:
         spec:
           deletionPolicy: Delete          
           forProvider:
-            bucketName:
             region: us-east-1
             policy:
               version: "2012-10-17"
