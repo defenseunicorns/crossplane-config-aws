@@ -31,7 +31,7 @@ spec:
             name: default
       patches:
         - fromFieldPath: "spec.parameters.bucketName"
-          toFieldPath: "metadata.name"
+          toFieldPath: "spec.forProvider.bucketName"
         - fromFieldPath: "metadata.annotations.crossplane.io/external-name"
           toFieldPath: "metadata.annotations.crossplane.io/external-name"
         - fromFieldPath: "spec.parameters.region"
