@@ -20,7 +20,6 @@ spec:
             internalName: dbsecuritygroup
         spec:
           forProvider:
-            groupName: database-security-group
             description: Security group for database
             ingress:
               - fromPort: 5432
@@ -35,6 +34,12 @@ spec:
           toFieldPath: "spec.forProvider.region"
         - fromFieldPath: "spec.parameters.sgName"
           toFieldPath: "metadata.name"
+        - fromFieldPath: "metadata.uid"
+          toFieldPath: "spec.forProvider.groupName"
+          transforms:
+            - type: string
+              string:
+                fmt: "database-security-group-%s"          
     - name: rdsinstance
       base:
         apiVersion: database.aws.crossplane.io/v1beta1

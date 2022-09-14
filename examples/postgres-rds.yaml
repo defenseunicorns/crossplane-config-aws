@@ -23,8 +23,7 @@ spec:
     storageGB: 10
     region: us-east-1
     availabilityZone: us-east-1a
-    dbName: postgres_rds_test
-    sgName: postgres_rds_test
+    dbName: postgresrdstest
     publiclyAccessible: false
     dbInstanceClass: db.t3.medium
     dbSubnetMatchLabels:
