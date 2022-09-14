@@ -1,3 +1,6 @@
+# The version of the build harness container to use
+BUILD_HARNESS_VERSION := 0.0.13
+
 KIND_VERSION := v0.14.0
 
 KIND_BIN := kind
@@ -76,3 +79,22 @@ install-crossplane-config-aws: ## Install the Crossplane configuration and your 
 teardown-cluster: build/kind ## Tear down the k8s cluster
 	echo "Tearing down the k8s cluster..."
 	build/kind delete cluster --name test-crossplane-config-aws
+
+.PHONY: run-pre-commit-hooks
+run-pre-commit-hooks: ## Run all pre-commit hooks. Returns nonzero exit code if any hooks fail. Uses Docker for maximum compatibility
+	@mkdir -p .cache/pre-commit
+	@docker run --rm -v "${PWD}:/app" --workdir "/app" -e "PRE_COMMIT_HOME=/app/.cache/pre-commit" ghcr.io/defenseunicorns/zarf-package-software-factory/build-harness:$(BUILD_HARNESS_VERSION) pre-commit run -a
+
+.PHONY: docker-save-build-harness
+docker-save-build-harness: ## Pulls the build harness docker image and saves it to a tarball
+	@mkdir -p .cache/docker
+	@docker pull ghcr.io/defenseunicorns/zarf-package-software-factory/build-harness:$(BUILD_HARNESS_VERSION)
+	@docker save -o .cache/docker/build-harness.tar ghcr.io/defenseunicorns/zarf-package-software-factory/build-harness:$(BUILD_HARNESS_VERSION)
+
+.PHONY: docker-load-build-harness
+docker-load-build-harness: ## Loads the saved build harness docker image
+	@docker load -i .cache/docker/build-harness.tar
+
+.PHONY: fix-cache-permissions
+fix-cache-permissions: ## Fixes the permissions on the pre-commit cache
+	@docker run --rm -v "${PWD}:/app" --workdir "/app" -e "PRE_COMMIT_HOME=/app/.cache/pre-commit" ghcr.io/defenseunicorns/zarf-package-software-factory/build-harness:$(BUILD_HARNESS_VERSION) chmod -R a+rx .cache
