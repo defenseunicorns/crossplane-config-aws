@@ -18,4 +18,4 @@ It will create:
 
 1. Follow the [Getting Started](../../README.md#getting-started) docs.
 
-1. Provision an enclave using `kubectl apply -f <filename>`. Here's an [example configuration](../../examples/enclave.yaml).
+1. Provision an enclave using `kubectl apply -f <filename>`. Here's an [example configuration](../../claim-examples/enclave.yaml).

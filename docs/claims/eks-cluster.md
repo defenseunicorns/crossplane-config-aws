@@ -11,4 +11,4 @@ It will create:
 
 1. Follow the [Getting Started](../../README.md#getting-started) docs.
 
-1. Provision an EKS cluster using `kubectl apply -f <filename>`. Here's an [example configuration](../../examples/eks-cluster.yaml).
+1. Provision an EKS cluster using `kubectl apply -f <filename>`. Here's an [example configuration](../../claim-examples/eks-cluster.yaml).
