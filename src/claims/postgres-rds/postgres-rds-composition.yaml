@@ -53,7 +53,6 @@ spec:
             port: 5432
             storageType: gp2
             publiclyAccessible: false
-            availabilityZone: us-east-1a
             skipFinalSnapshotBeforeDeletion: true
             vpcSecurityGroupIDSelector:
               matchControllerRef: true
