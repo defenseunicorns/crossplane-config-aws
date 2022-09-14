@@ -22,7 +22,7 @@ spec:
             policy:
               version: "2012-10-17"
               statements:
-                effect: Allow
+              - effect: Allow
                 action:
                 - s3:PutObject
                 principal:
