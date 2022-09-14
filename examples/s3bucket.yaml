@@ -9,6 +9,10 @@ spec:
   parameters:
     bucketName: test-s3-bucket-us-east-1
     region: us-east-1
+    bucketPolicyConfig:
+      effect: Allow
+      principal: "*"
+      action: "s3:PutObject"
   compositionSelector:
     matchLabels:
       provider: aws

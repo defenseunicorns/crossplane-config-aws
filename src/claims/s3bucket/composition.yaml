@@ -45,7 +45,7 @@ spec:
             policy:
               version: "2012-10-17"
               statements:
-                - effect: "Allow"
+                # - effect: "Allow"
                   action:
                    - "s3:PutObject"
                   principal:
@@ -65,3 +65,5 @@ spec:
           toFieldPath: "metadata.annotations.crossplane.io/external-name"
         - fromFieldPath: "spec.parameters.region"
           toFieldPath: "spec.forProvider.region"
+        - fromFieldPath: "spec.parameters.bucketPolicyConfig.effect"
+          toFieldPath: "spec.forProvider.policy.statements[0].effect[0]"
