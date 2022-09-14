@@ -25,6 +25,9 @@ spec:
           providerConfigRef:
             name: default
       patches:
+        - fromFieldPath: "status.atProvider.arn"
+          toFieldPath: "status.bucketArn"
+          type: ToCompositeFieldPath
         - fromFieldPath: "spec.parameters.bucketName"
           toFieldPath: "metadata.name"
         - fromFieldPath: "metadata.annotations.crossplane.io/external-name"
@@ -48,8 +51,6 @@ spec:
                    - "s3:PutObject"
                   principal:
                     allowAnon: true
-                  resource:
-                    - "arn:aws:s3:::test-s3-bucket-us-east-1/*"
           providerConfigRef:
             name: default
       patches:
