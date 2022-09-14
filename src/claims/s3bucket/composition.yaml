@@ -17,7 +17,6 @@ spec:
         spec:
           deletionPolicy: Delete          
           forProvider:
-            acl: private
             serverSideEncryptionConfiguration:
               rules:
                 - applyServerSideEncryptionByDefault:
@@ -41,13 +40,13 @@ spec:
         spec:
           deletionPolicy: Delete          
           forProvider:
-            region: us-east-1
             policy:
               version: "2012-10-17"
               statements:
                 - effect: "Allow"
                   action:
-                   - "s3:PutObject"
+                    - "s3:GetObject"
+                    - "s3:PutObject"
                   principal:
                     awsPrincipals:
                       - awsAccountId: "950698127059"
@@ -66,5 +65,3 @@ spec:
           toFieldPath: "metadata.annotations.crossplane.io/external-name"
         - fromFieldPath: "spec.parameters.region"
           toFieldPath: "spec.forProvider.region"
-        - fromFieldPath: "spec.parameters.bucketPolicyConfig.effect"
-          toFieldPath: "spec.forProvider.policy.statements[0].effect[0]"

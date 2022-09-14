@@ -29,15 +29,6 @@ spec:
                     type: string
                   region:
                     type: string
-                  bucketPolicyConfig:
-                    type: object
-                    properties:
-                      effect:
-                        type: string
-                      principal:
-                        type: string
-                      action:
-                        type: string
                 required:
                   - bucketName
                   - region
