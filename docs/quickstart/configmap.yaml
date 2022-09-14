@@ -1,0 +1,40 @@
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::950698127059:role/eksctl-crossplane-team1-nodegroup-NodeInstanceRole-1R5EO549WMZ1G
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - groups:
+      - system:masters
+      userarn: arn:aws:iam::950698127059:user/brian.rexrode
+      username: brian.rexrode
+    - groups:
+      - system:masters
+      userarn: arn:aws:iam::950698127059:user/gabe
+      username: gabe
+    - groups:
+      - system:masters
+      userarn: arn:aws:iam::950698127059:user/andrew.blanchard
+      username: andrew.blanchard
+    - groups:
+      - system:masters
+      userarn: arn:aws:iam::950698127059:user/darcy
+      username: darcy
+    - groups:
+      - system:masters
+      userarn: arn:aws:iam::950698127059:user/andy.roth
+      username: andy.roth
+    - groups:
+      - system:masters
+      userarn: arn:aws:iam::950698127059:user/justin
+      username: justin 
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2022-07-14T19:36:37Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "6325"
+  uid: f9bb6915-dcb2-4ff6-ac4f-3ef32679fdd1
