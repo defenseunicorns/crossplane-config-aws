@@ -1,0 +1,16 @@
+1. Get the Ghost URL by running:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch the status with: 'kubectl get svc --namespace default -w my-release-ghost'
+
+  export APP_HOST=$(kubectl --kubeconfig aws_config.yaml get svc --namespace default my-release-ghost --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
+
+  export GHOST_PASSWORD=$(kubectl --kubeconfig aws_config.yaml get secret --namespace "default" my-release-ghost -o jsonpath="{.data.ghost-password}" | base64 -d)
+  export MYSQL_ROOT_PASSWORD=$(kubectl --kubeconfig aws_config.yaml get secret --namespace "default" my-release-mysql -o jsonpath="{.data.mysql-root-password}" | base64 -d)
+  export MYSQL_PASSWORD=$(kubectl --kubeconfig aws_config.yaml get secret --namespace "default" my-release-mysql -o jsonpath="{.data.mysql-password}" | base64 -d)
+
+2. Complete your Ghost deployment by running:
+
+    helm upgrade my-release bitnami/ghost --kubeconfig aws_config.yaml --set service.type=LoadBalancer,ghostHost=$APP_HOST ghostPassword=$GHOST_PASSWORD,mysql.enabled=false,externalDatabase.host=postgres-rds-test-composition-cgq2x-7vx5n.cm0mrgfonxcv.us-east-1.rds.amazonaws.com,externalDatabase.user=postgres,externalDatabase.database=postgresrdstest
+
+    helm upgrade my-release bitnami/ghost --kubeconfig aws_config.yaml --set ghostHost=$APP_HOST,ghostPassword=$GHOST_PASSWORD,mysql.enabled=false,externalDatabase.host=postgres-rds-test-composition-cgq2x-7vx5n.cm0mrgfonxcv.us-east-1.rds.amazonaws.com,externalDatabase.user=postgres,externalDatabase.database=postgresrdstest
