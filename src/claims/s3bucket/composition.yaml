@@ -45,11 +45,12 @@ spec:
             policy:
               version: "2012-10-17"
               statements:
-                # - effect: "Allow"
+                - effect: "Allow"
                   action:
                    - "s3:PutObject"
                   principal:
-                    allowAnon: true
+                    awsPrincipals:
+                      - awsAccountId: "950698127059"
           providerConfigRef:
             name: default
       patches:
