@@ -31,3 +31,37 @@ spec:
           toFieldPath: "metadata.annotations.crossplane.io/external-name"
         - fromFieldPath: "spec.parameters.region"
           toFieldPath: "spec.forProvider.locationConstraint"
+    - name: bucketpolicy
+      base:
+        apiVersion: s3.aws.crossplane.io/v1alpha3
+        kind: BucketPolicy
+        spec:
+          deletionPolicy: Delete          
+          forProvider:
+            bucketName:
+            region: us-east-1
+            policy:
+              version: "2012-10-17"
+              statements:
+                - effect: "Allow"
+                  action:
+                   - "s3:PutObject"
+                  principal:
+                    allowAnon: true
+                  resource:
+                    - "arn:aws:s3:::test-s3-bucket-us-east-1/*"
+          providerConfigRef:
+            name: default
+      patches:
+        - fromFieldPath: "status.bucketArn"
+          toFieldPath: "spec.forProvider.policy.statements[0].resource[0]"
+          transforms:
+            - type: string
+              string:
+                fmt: "%s/*"
+        - fromFieldPath: "spec.parameters.bucketName"
+          toFieldPath: "spec.forProvider.bucketName"
+        - fromFieldPath: "metadata.annotations.crossplane.io/external-name"
+          toFieldPath: "metadata.annotations.crossplane.io/external-name"
+        - fromFieldPath: "spec.parameters.region"
+          toFieldPath: "spec.forProvider.region"

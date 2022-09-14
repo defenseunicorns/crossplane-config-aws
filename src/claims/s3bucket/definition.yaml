@@ -34,3 +34,9 @@ spec:
                   - region
             required:
               - parameters
+          status:
+            type: object
+            properties:
+              bucketArn:
+                description: ARN of bucket
+                type: string
