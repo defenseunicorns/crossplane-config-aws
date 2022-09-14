@@ -39,11 +39,23 @@ spec:
                     type: boolean
                   dbInstanceClass:
                     type: string
+                  dbSubnetMatchLabels:
+                    description: The labels to match to when selecting the dbsubnetgroup
+                    type: object
+                    additionalProperties: true
+                  availabilityZone:
+                    type: string
+                  vpcIdSelectorMatchLabels:
+                    description: The labels to match to when selecting the vpcId
+                    type: object
+                    additionalProperties: true
                 required:
                   - storageGB
                   - region
                   - dbName
-                  - publiclyAccessible
                   - dbInstanceClass
+                  - dbSubnetMatchLabels
+                  - availabilityZone
+                  - vpcIdSelectorMatchLabels
             required:
               - parameters

@@ -1,3 +1,18 @@
+apiVersion: infra.bigbang.dev/v1alpha1
+kind: Enclave
+metadata:
+  name: db-enclave
+  namespace: crossplane-system
+spec:
+  parameters:
+    region: us-east-1
+    availabilityZone1: us-east-1a
+    availabilityZone2: us-east-1b
+    availabilityZone3: us-east-1c
+  compositionSelector:
+    matchLabels:
+      provider: aws
+---
 apiVersion: databases.bigbang.dev/v1alpha1
 kind: PostgreSQLInstance
 metadata:
@@ -7,9 +22,18 @@ spec:
   parameters:
     storageGB: 10
     region: us-east-1
-    dbName: postgres_rds_test
-    publiclyAccessible: true
+    availabilityZone: us-east-1a
+    dbName: postgresrdstest
+    publiclyAccessible: false
     dbInstanceClass: db.t3.medium
+    dbSubnetMatchLabels:
+      crossplane.io/claim-name: db-enclave
+      crossplane.io/claim-namespace: crossplane-system
+      internalName: dbsubnetgroup
+    vpcIdSelectorMatchLabels:
+      crossplane.io/claim-name: db-enclave
+      crossplane.io/claim-namespace: crossplane-system
+      internalName: vpc
   compositionSelector:
     matchLabels:
       provider: aws
