@@ -35,6 +35,8 @@ spec:
                     type: string
                   dbName:
                     type: string
+                  sgName:
+                    type: string
                   publiclyAccessible:
                     type: boolean
                   dbInstanceClass:
@@ -53,6 +55,7 @@ spec:
                   - storageGB
                   - region
                   - dbName
+                  - sgName
                   - dbInstanceClass
                   - dbSubnetMatchLabels
                   - availabilityZone
