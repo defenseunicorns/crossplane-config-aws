@@ -1,0 +1,61 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: compositemysqlinstances.databases.bigbang.dev
+spec:
+  group: databases.bigbang.dev
+  names:
+    kind: CompositeMySQLInstance
+    plural: compositemysqlinstances
+  claimNames:
+    kind: MySQLInstance
+    plural: mysqlinstances
+  connectionSecretKeys:
+    - username
+    - password
+    - endpoint
+    - port
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              parameters:
+                type: object
+                properties:
+                  storageGB:
+                    type: integer
+                  region:
+                    type: string
+                  dbName:
+                    type: string
+                  publiclyAccessible:
+                    type: boolean
+                  dbInstanceClass:
+                    type: string
+                  dbSubnetMatchLabels:
+                    description: The labels to match to when selecting the dbsubnetgroup
+                    type: object
+                    additionalProperties: true
+                  availabilityZone:
+                    type: string
+                  vpcIdSelectorMatchLabels:
+                    description: The labels to match to when selecting the vpcId
+                    type: object
+                    additionalProperties: true
+                required:
+                  - storageGB
+                  - region
+                  - dbName
+                  - dbInstanceClass
+                  - dbSubnetMatchLabels
+                  - availabilityZone
+                  - vpcIdSelectorMatchLabels
+            required:
+              - parameters

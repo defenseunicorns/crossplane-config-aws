@@ -646,24 +646,24 @@ mysql:
 externalDatabase:
   ## @param externalDatabase.host External Database server host
   ##
-  host: postgres-rds-test-composition-cgq2x-7vx5n.cm0mrgfonxcv.us-east-1.rds.amazonaws.com
+  host: mysql-rds-test-composition-lxbhs-kc8bs.cm0mrgfonxcv.us-east-1.rds.amazonaws.com
   ## @param externalDatabase.port External Database server port
   ##
   port: 5432
   ## @param externalDatabase.user External Database username
   ##
-  user: "postgres"
+  user: mysqlamin
   ## @param externalDatabase.password External Database user password
   ##
   password: ""
   ## @param externalDatabase.database External Database database name
   ##
-  database: "postgresrdstest"
+  database: mysqlrdstest
   ## @param externalDatabase.existingSecret The name of an existing secret with database credentials
   ## NOTE: Must contain key `mysql-password`
   ## NOTE: When it's set, the `externalDatabase.password` parameter is ignored
   ##
-  existingSecret: "postgres-credential"
+  existingSecret: "aws-rds"
   ## @param externalDatabase.ssl External Database ssl
   ##
   ssl: false
