@@ -1,0 +1,21 @@
+---
+apiVersion: databases.bigbang.dev/v1alpha1
+kind: MySQLChildInstance
+metadata:
+  name: mysql-rds-test-composition
+  namespace: default
+spec:
+  parameters:
+    storageGB: 10
+    region: us-east-1
+    availabilityZone: us-east-1a
+    dbName: mysqlrdstest
+    publiclyAccessible: false
+    dbInstanceClass: db.t3.medium
+    dbSubnetGroupName: enclave-eks-db-flow-692r9-x85d4
+    vpcId: vpc-0d86c20f006cf4fd0
+  compositionSelector:
+    matchLabels:
+      provider: aws
+  writeConnectionSecretToRef:
+    name: mysql-rds-test-composition

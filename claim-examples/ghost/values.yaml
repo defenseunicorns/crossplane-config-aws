@@ -72,7 +72,7 @@ image:
   pullSecrets: []
   ## Enable debug mode
   ##
-  debug: false
+  debug: true
 
 ## @section Ghost Configuration parameters
 ## Ghost settings based on environment variables
@@ -646,13 +646,13 @@ mysql:
 externalDatabase:
   ## @param externalDatabase.host External Database server host
   ##
-  host: mysql-rds-test-composition-lxbhs-kc8bs.cm0mrgfonxcv.us-east-1.rds.amazonaws.com
+  host: mysql-rds-test-composition-8w68j-lmj6f.cm0mrgfonxcv.us-east-1.rds.amazonaws.com
   ## @param externalDatabase.port External Database server port
   ##
-  port: 5432
+  port: 3306 
   ## @param externalDatabase.user External Database username
   ##
-  user: mysqlamin
+  user: mysqladmin
   ## @param externalDatabase.password External Database user password
   ##
   password: ""
