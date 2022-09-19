@@ -13,6 +13,7 @@ spec:
   connectionSecretKeys:
     - username
     - password
+    # - test
     - endpoint
     - port
   versions:

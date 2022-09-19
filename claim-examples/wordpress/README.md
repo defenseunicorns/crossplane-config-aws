@@ -9,6 +9,8 @@
     * EKS kubeconfig loaded
     * Crossplane CLI installed
 
+_Note: [Zero-to-Hero](ZERO_TO_HERO.md) includes steps to satisfy prerequisites_
+
 ## Install Crossplane in EKS
 
 1. Create namespace
@@ -55,7 +57,9 @@
     ```
     helm upgrade -i --namespace default my-release bitnami/ghost \
     --set service.type=LoadBalancer,existingSecret=ghost-creds,mysql.enabled=false,externalDatabase.host=mysql-rds-test-composition-8w68j-lmj6f.cm0mrgfonxcv.us-east-1.rds.amazonaws.com,externalDatabase.user=mysqladmin,externalDatabase.database=mysqlrdstest
+
     sleep 15
+    
     helm upgrade -i --namespace default my-release bitnami/ghost \
     --set service.type=LoadBalancer,ghostHost=$(kubectl get svc --namespace default my-release-ghost --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}"),existingSecret=ghost-creds,mysql.enabled=false,externalDatabase.host=mysql-rds-test-composition-8w68j-lmj6f.cm0mrgfonxcv.us-east-1.rds.amazonaws.com,externalDatabase.user=mysqladmin,externalDatabase.database=mysqlrdstest
     ```

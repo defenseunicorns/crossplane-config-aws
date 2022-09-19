@@ -83,5 +83,7 @@ spec:
       connectionDetails:
         - fromConnectionSecretKey: username
         - fromConnectionSecretKey: password
+        # - name: test
+          # fromConnectionSecretKey: password
         - fromConnectionSecretKey: endpoint
         - fromConnectionSecretKey: port
